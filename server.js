@@ -1,13 +1,9 @@
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 const app = express();
 
-// Proxy requests to local server
-app.use('/Bank-of-Flatiron', createProxyMiddleware({ target: 'http://localhost:3000', changeOrigin: true }));
+// Other middleware and route configurations...
 
-// Start server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Proxy server listening on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
