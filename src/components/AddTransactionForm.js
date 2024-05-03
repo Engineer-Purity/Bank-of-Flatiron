@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import Transaction from "./Transaction";
 
 function AddTransactionForm() {
-  const [date, setDate] = useState("")
-  const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("")
-  const [amount, setAmount] = useState("")
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [amount, setAmount] = useState("");
+
   function handleSubmit(e) {
+    e.preventDefault(); // Prevent the default form submission behavior
+    
     fetch("http://localhost:8001/transactions", {
       method: "POST",
       headers: {
@@ -18,9 +20,25 @@ function AddTransactionForm() {
         category: category,
         amount: amount,
       }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to add transaction');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Handle successful response
+      console.log(data); // Log the response data if needed
+      alert("Transaction added successfully");
+    })
+    .catch(error => {
+      // Handle error
+      console.error('Error adding transaction:', error.message);
+      alert("Failed to add transaction. Please try again later.");
     });
-     alert("added successfully")
   }
+
   return (
     <div className="ui segment">
       <form onSubmit={handleSubmit} className="ui form">
