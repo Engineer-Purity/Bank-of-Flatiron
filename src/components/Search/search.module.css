@@ -1,0 +1,17 @@
+:root {
+    --red: #e63946;
+    --grey: #ccc;
+  }
+  
+  .search {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    outline: none;
+    margin-top: 2rem;
+    border-radius: 5px;
+  }
+  .search:focus {
+    border: 1px solid var(--red);
+    caret-color: var(--red);
+  }
